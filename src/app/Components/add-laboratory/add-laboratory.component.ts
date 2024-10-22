@@ -20,22 +20,21 @@ export class AddLaboratoryComponent  implements OnInit{
       name: ['', Validators.required],
       logo: ['', Validators.required],
       nrc: ['', Validators.required],
-      active: [true, Validators.required],
+      active: [true],
       dateActivation: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.labForm.valid) {
-        const laboratoireData: Omit<Laboratoire, 'id'> = { // Change here
+        const laboratoireData: Omit<Laboratoire, 'id'> = { 
             name: this.labForm.value.name,
             logo: this.labForm.value.logo,
             nrc: this.labForm.value.nrc,
-            active: this.labForm.value.active === 'true',
+            active: this.labForm.value.active === true,
             dateActivation: new Date(this.labForm.value.dateActivation) 
         };
 
-        // Use the service to call the backend API
         this.laboratoireService.createLaboratoire(laboratoireData).subscribe({
             next: (response) => {
                 console.log('Laboratoire créé avec succès', response);

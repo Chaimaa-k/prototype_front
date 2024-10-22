@@ -53,7 +53,25 @@ describe('AddLaboratoryComponent', () => {
     expect(nrcErrors['required']).toBeTruthy();   
   });
   
+  it('should submit the form and create a laboratory', () => {
+    const laboratoireData = {
+        name: 'Test Laboratory',
+        logo: 'http://example.com/logo.png',
+        nrc: '123456',
+        active: true,  
+        dateActivation: new Date(),
+    };
 
+    spyOn(laboratoireService, 'createLaboratoire').and.returnValue(of(laboratoireData));
+
+    component.labForm.setValue(laboratoireData);
+
+    component.onSubmit();
+
+    expect(laboratoireService.createLaboratoire).toHaveBeenCalledWith(laboratoireData);
+});
+
+  
   
 });
 
