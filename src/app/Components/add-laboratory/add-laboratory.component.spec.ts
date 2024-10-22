@@ -33,6 +33,25 @@ describe('AddLaboratoryComponent', () => {
     expect(component.labForm.get('dateActivation')!.value).toBe(''); 
   });
   
+  it('should be invalid when required fields are empty', () => {
+    const form = component.labForm;
+  
+    expect(form.get('name')!.value).toBe('');
+    expect(form.get('logo')!.value).toBe('');
+    expect(form.get('nrc')!.value).toBe('');
+    expect(form.get('dateActivation')!.value).toBe('');
+  
+    expect(form.valid).toBeFalsy();  
+  
+    expect(form.get('name')!.valid).toBeFalsy();  
+    expect(form.get('nrc')!.valid).toBeFalsy();   
+  
+    const nameErrors = form.get('name')!.errors || {};
+    expect(nameErrors['required']).toBeTruthy();  
+  
+    const nrcErrors = form.get('nrc')!.errors || {};
+    expect(nrcErrors['required']).toBeTruthy();   
+  });
   
 
   
