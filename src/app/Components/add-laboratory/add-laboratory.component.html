@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Créer un nouveau laboratoire</h2>
+  <form [formGroup]="labForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+    
+    <div class="form-group mb-3">
+      <label for="name" class="form-label">Nom officiel du laboratoire:</label>
+      <input id="name" formControlName="name" type="text" class="form-control" required>
+      <div *ngIf="labForm.controls['name'].invalid && labForm.controls['name'].touched" class="text-danger">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="logo" class="form-label">URL du logo du laboratoire:</label>
+      <input id="logo" formControlName="logo" type="url" class="form-control" required>
+      <div *ngIf="labForm.controls['logo'].invalid && labForm.controls['logo'].touched" class="text-danger">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="nrc" class="form-label">Numéro de Registre de Commerce (NRC):</label>
+      <input id="nrc" formControlName="nrc" type="text" class="form-control" required>
+      <div *ngIf="labForm.controls['nrc'].invalid && labForm.controls['nrc'].touched" class="text-danger">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="active" class="form-label">Statut d'activité:</label>
+      <select id="active" formControlName="active" class="form-select" required>
+        <option value="true">Actif</option>
+        <option value="false">Inactif</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="dateActivation" class="form-label">Date d'activation:</label>
+      <input id="dateActivation" formControlName="dateActivation" type="date" class="form-control" required>
+      <div *ngIf="labForm.controls['dateActivation'].invalid && labForm.controls['dateActivation'].touched" class="text-danger">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="labForm.invalid">Créer</button>
+
+  </form>
+</div>
