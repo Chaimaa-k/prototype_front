@@ -71,7 +71,27 @@ describe('AddLaboratoryComponent', () => {
     expect(laboratoireService.createLaboratoire).toHaveBeenCalledWith(laboratoireData);
 });
 
+it('should handle error on form submission', () => {
   
+  spyOn(laboratoireService, 'createLaboratoire').and.returnValue(throwError({ message: 'Error occurred' }));
+
+  const consoleErrorSpy = spyOn(console, 'error');
+
+  component.labForm.setValue({
+      name: 'Test Laboratory',
+      logo: 'http://example.com/logo.png',
+      nrc: '123456',
+      active: true,
+      dateActivation: new Date(),
+  });
+
+
+  component.onSubmit();
+
+  expect(consoleErrorSpy).toHaveBeenCalledWith('Erreur lors de la création du laboratoire:', jasmine.any(String)); 
+  expect(consoleErrorSpy.calls.mostRecent().args[1]).toEqual('Error occurred'); 
+});
+
   
 });
 
