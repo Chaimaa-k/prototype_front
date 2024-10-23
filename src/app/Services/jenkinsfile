@@ -1,0 +1,25 @@
+pipeline {
+  agent any 
+  stages {
+    stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+    stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+    stage('run'){
+            steps {
+              sh 'ng serve'
+            }
+    }
+    stage('Run Tests') {
+            steps {
+                sh 'ng test' 
+            }
+        }
+  }
+}
